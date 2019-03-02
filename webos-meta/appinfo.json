@@ -1,0 +1,12 @@
+{
+	"id": "com.cinesquare",
+	"title": "Cinesquare",
+	"type": "web",
+	"main": "index.html",
+	"largeIcon": "Cinesquare.png",
+	"icon": "CinesquareSmall.png",
+	"splashBackground": "CinesquareSplash.png",
+	"vendor": "Cinesquare",
+	"version": "1.0.0",
+	"iconColor": "#262626"
+}
