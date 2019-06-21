@@ -5,15 +5,8 @@ import React from 'react';
 
 import MainPanel from '../views/MainPanel';
 
-import css from './App.module.less';
-
 const App = kind({
 	name: 'App',
-
-	styles: {
-		css,
-		className: 'app'
-	},
 
 	render: (props) => (
 		<div {...props}>
