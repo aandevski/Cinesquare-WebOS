@@ -5,7 +5,6 @@ import Panels from '@enact/moonstone/Panels';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import MainPanel from '../views/MainPanel';
 import LogIn from '../views/LogIn';
 
 const mapStateToProps = state => {
@@ -25,7 +24,6 @@ const App = kind({
 		<div {...props}>
 			<Panels index={props.index}>
 				<LogIn />
-				<MainPanel />
 			</Panels>
 		</div>
 	)
