@@ -1,7 +1,7 @@
-import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILED } from '../constants/action-types';
+import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILED, USERDATA_SUCCESS } from '../constants/action-types';
 
 const initialState = {
-	userToken: null,
+	user: null,
 	isLoggingIn: false,
 	loginError: null,
 	panelIndex: 0
@@ -18,7 +18,9 @@ const reducer = (state = initialState, action) => {
 		return {
 			...state,
 			isLoggingIn: false,
-			userToken: action.payload.token,
+			user: {
+				token: action.payload.token
+			},
 			panelIndex: 1
 		};
 	} else if (action.type === LOGIN_FAILED) {
@@ -27,6 +29,14 @@ const reducer = (state = initialState, action) => {
 			isLoggingIn: false,
 			loginError: action.payload.error
 		};
+	} else if (action.type === USERDATA_SUCCESS) {
+		return {
+			...state,
+			user: {
+				...state.user,
+				...action.payload
+			}
+		}
 	}
 	return state;
 };
