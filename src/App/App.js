@@ -6,6 +6,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import LogIn from '../views/LogIn';
+import MovieList from '../views/MovieList';
 
 const mapStateToProps = state => {
 	return {
@@ -24,6 +25,7 @@ const App = kind({
 		<div {...props}>
 			<Panels index={props.index}>
 				<LogIn />
+				<MovieList />
 			</Panels>
 		</div>
 	)

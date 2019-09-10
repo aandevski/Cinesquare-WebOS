@@ -1,10 +1,14 @@
-import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILED, USERDATA_SUCCESS } from '../constants/action-types';
+import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILED, USERDATA_SUCCESS, MOVIELIST_REQUEST, MOVIELIST_SUCCESS, MOVIELIST_FAILED } from '../constants/action-types';
 
 const initialState = {
 	user: null,
 	isLoggingIn: false,
+	isDownloadingMovieList: false,
 	loginError: null,
-	panelIndex: 0
+	movieListError: null,
+	panelIndex: 0,
+	ownedMovieList: [],
+	moviesById: {}
 };
 
 const reducer = (state = initialState, action) => {
@@ -37,6 +41,29 @@ const reducer = (state = initialState, action) => {
 				...action.payload
 			}
 		}
+	} else if (action.type === MOVIELIST_REQUEST) {
+		return {
+			...state,
+			isDownloadingMovieList: true
+		};
+	} else if (action.type === MOVIELIST_SUCCESS) {
+		const moviesById = {
+			...state.moviesById
+		};
+		action.payload.forEach(movie => {
+			moviesById[movie.id] = movie;
+		});
+		return {
+			...state,
+			moviesById,
+			ownedMovieList: action.payload,
+			isDownloadingMovieList: false,
+		};
+	} else if (action.type === MOVIELIST_FAILED) {
+		return {
+			isDownloadingMovieList: false,
+			movieListError: action.payload.error
+		};
 	}
 	return state;
 };

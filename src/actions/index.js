@@ -1,4 +1,4 @@
-import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILED, USERDATA_SUCCESS } from '../constants/action-types';
+import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILED, USERDATA_SUCCESS, MOVIELIST_REQUEST, MOVIELIST_SUCCESS, MOVIELIST_FAILED } from '../constants/action-types';
 import fetch from 'node-fetch';
 
 const getUserData = (token, dispatch) => {
@@ -35,4 +35,25 @@ const sendLoginRequest = (username, password) => {
 	};
 };
 
-export { sendLoginRequest };
+const getOwnedMovies = () => {
+	return (dispatch, getState) => {
+		const userId = getState().user.id;
+		const token = getState().user.token;
+		dispatch({ type: MOVIELIST_REQUEST });
+		return fetch(`https://cinesquare.net/restful/order-detail/userid/${userId}/after`, {
+			headers: {
+				'X-Auth-Token': token,
+				'Cookie': `authToken=${encodeURI('"' + token + '"')}`,
+			}
+		})
+		.then(response => response.json())
+		.then(json => {
+			dispatch({ type: MOVIELIST_SUCCESS, payload: json });
+		})
+		.catch(() => {
+			dispatch({ type: MOVIELIST_FAILED, payload: { error: 'Failed fetching movies.' } });
+		});
+	};
+};
+
+export { sendLoginRequest, getOwnedMovies };
