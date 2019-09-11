@@ -24,8 +24,7 @@ const reducer = (state = initialState, action) => {
 			isLoggingIn: false,
 			user: {
 				token: action.payload.token
-			},
-			panelIndex: 1
+			}
 		};
 	} else if (action.type === LOGIN_FAILED) {
 		return {
@@ -39,7 +38,8 @@ const reducer = (state = initialState, action) => {
 			user: {
 				...state.user,
 				...action.payload
-			}
+			},
+			panelIndex: 1
 		}
 	} else if (action.type === MOVIELIST_REQUEST) {
 		return {
