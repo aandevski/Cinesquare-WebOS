@@ -8,7 +8,9 @@ const LogIn = kind({
 
 	render: (props) => (
 		<Panel {...props}>
-			<Header title="Log in"/>
+			<Header type="compact">
+				<title>Log in</title>
+			</Header>
 			<LogInContainer />
 		</Panel>
 	)

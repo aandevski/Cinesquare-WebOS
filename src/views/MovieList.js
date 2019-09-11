@@ -8,7 +8,9 @@ const MovieList = kind({
 
 	render: (props) => (
 		<Panel {...props}>
-			<Header title="Movies"/>
+			<Header type="compact">
+				<title>Movies</title>
+			</Header>
 			<MovieListContainer />
 		</Panel>
 	)

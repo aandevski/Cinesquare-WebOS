@@ -23,7 +23,7 @@ const App = kind({
 
 	render: (props) => (
 		<div {...props}>
-			<Panels index={props.index}>
+			<Panels index={props.index} noCloseButton>
 				<LogIn />
 				<MovieList />
 			</Panels>
