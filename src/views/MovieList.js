@@ -7,7 +7,7 @@ const MovieList = kind({
 	name: 'MovieList',
 
 	render: (props) => (
-		<Panel {...props}>
+		<Panel {...props} autoFocus="default-element">
 			<Header type="compact">
 				<title>Movies</title>
 			</Header>
