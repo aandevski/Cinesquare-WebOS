@@ -20,9 +20,15 @@ const MovieListItemBase = kind({
 		className: 'movieListItem'
 	},
 
+	handlers: {
+		onSelect: (evt, props) => {
+			props.selectMovie(props.movie.movie.id);
+		}
+	},
+
 	render: props => {
 		return (
-			<SpottableDiv onSpotlightLeft={props.onPrevMovie} onSpotlightRight={props.onNextMovie} className={props.className}>
+			<SpottableDiv onClick={props.onSelect} onSpotlightLeft={props.onPrevMovie} onSpotlightRight={props.onNextMovie} className={props.className}>
 				<MovieImage movie={props.movie.movie.refference} />
 			</SpottableDiv>
 		);

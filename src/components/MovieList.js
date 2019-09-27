@@ -6,11 +6,20 @@ import { connect } from 'react-redux';
 import MovieListItem from './MovieListItem/MovieListItem';
 import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDecorator';
 import Spotlight from '@enact/spotlight';
+import { watchMovie } from '../actions';
 
 const mapStateToProps = state => {
 	return {
 		movieArray: state.ownedMovieList,
 		loading: state.isDownloadingMovieList
+	};
+}
+
+const mapDispatchToProps = dispatch => {
+	return {
+		selectMovie: movieId => {
+			dispatch(watchMovie(movieId));
+		}
 	};
 }
 
@@ -25,8 +34,8 @@ const MovieListBase = kind({
 	},
 
 	computed: {
-		movies: ({movieArray, onNextMovie, onPrevMovie}) => {
-			return movieArray.map((movie, i) => (<MovieListItem onNextMovie={onNextMovie} onPrevMovie={onPrevMovie} spotlightId={`movie${i}`} key={i} className={(i == 0) ? "spottable-default" : "notFirst"} movie={movie} />));
+		movies: ({movieArray, onNextMovie, onPrevMovie, selectMovie}) => {
+			return movieArray.map((movie, i) => (<MovieListItem selectMovie={selectMovie} onNextMovie={onNextMovie} onPrevMovie={onPrevMovie} spotlightId={`movie${i}`} key={i} className={(i == 0) ? "spottable-default" : "notFirst"} movie={movie} />));
 		}
 	},
 
@@ -41,6 +50,6 @@ const MovieListBase = kind({
 	}
 });
 
-const MovieList = connect(mapStateToProps)(MovieListBase);
+const MovieList = connect(mapStateToProps, mapDispatchToProps)(MovieListBase);
 
 export default MovieList;

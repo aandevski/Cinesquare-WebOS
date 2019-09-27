@@ -1,4 +1,6 @@
-import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILED, USERDATA_SUCCESS, MOVIELIST_REQUEST, MOVIELIST_SUCCESS, MOVIELIST_FAILED } from '../constants/action-types';
+import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILED, USERDATA_SUCCESS, 
+	MOVIELIST_REQUEST, MOVIELIST_SUCCESS, MOVIELIST_FAILED, 
+	WATCHMOVIE_REQUEST, WATCHMOVIE_SUCCESS, WATCHMOVIE_FAILED } from '../constants/action-types';
 import fetch from 'node-fetch';
 
 const getUserData = (token, dispatch) => {
@@ -56,4 +58,25 @@ const getOwnedMovies = () => {
 	};
 };
 
-export { sendLoginRequest, getOwnedMovies };
+const watchMovie = movieId => {
+	return (dispatch, getState) => {
+		const userId = getState().user.id;
+		const token = getState().user.token;
+		dispatch({ type: WATCHMOVIE_REQUEST, payload: { id: movieId } });
+		return fetch(`https://cinesquare.net//restful/order-detail/token/${userId}/${movieId}`, {
+			headers: {
+				'X-Auth-Token': token,
+				'Cookie': `authToken=${encodeURI('"' + token + '"')}`,
+			}
+		})
+		.then(response => response.json())
+		.then(json => {
+			dispatch({ type: WATCHMOVIE_SUCCESS, payload: json});
+		})
+		.catch(() => {
+			dispatch({ type: WATCHMOVIE_FAILED, payload: { error: 'Failed fetching movie'}});
+		});
+	}
+}
+
+export { sendLoginRequest, getOwnedMovies, watchMovie };

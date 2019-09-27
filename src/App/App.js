@@ -4,9 +4,9 @@ import MoonstoneDecorator from '@enact/moonstone/MoonstoneDecorator';
 import Panels from '@enact/moonstone/Panels';
 import React from 'react';
 import { connect } from 'react-redux';
-
 import LogIn from '../views/LogIn';
 import MovieList from '../views/MovieList';
+import WatchMovie from '../views/WatchMovie';
 
 const mapStateToProps = state => {
 	return {
@@ -26,6 +26,7 @@ const App = kind({
 			<Panels index={props.index} noCloseButton>
 				<LogIn />
 				<MovieList />
+				<WatchMovie />
 			</Panels>
 		</div>
 	)
