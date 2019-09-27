@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 const mapStateToProps = (state, ownProps) => {
-	console.log(state.moviesById);
 	return {
 		movie: state.moviesById[ownProps.movieId]
 	};
