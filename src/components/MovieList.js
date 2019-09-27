@@ -4,7 +4,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import MovieListItem from './MovieListItem/MovieListItem';
-import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDecorator';
+import { spotlightDefaultClass } from '@enact/spotlight/SpotlightContainerDecorator';
 import Spotlight from '@enact/spotlight';
 import { watchMovie } from '../actions';
 
@@ -35,17 +35,24 @@ const MovieListBase = kind({
 
 	computed: {
 		movies: ({movieArray, onNextMovie, onPrevMovie, selectMovie}) => {
-			return movieArray.map((movie, i) => (<MovieListItem selectMovie={selectMovie} onNextMovie={onNextMovie} onPrevMovie={onPrevMovie} spotlightId={`movie${i}`} key={i} className={(i == 0) ? "spottable-default" : "notFirst"} movie={movie} />));
+			return movieArray.map((movie, i) => (
+				<MovieListItem
+					selectMovie={selectMovie}
+					onNextMovie={onNextMovie}
+					onPrevMovie={onPrevMovie}
+					key={i}
+					movie={movie}
+					className={(i == 0) ? spotlightDefaultClass : ""}
+				/>
+			));
 		}
 	},
 
 	render: props => {
 		return (
-			(props.loading) ? <h1>Loading...</h1> : (
-				<div>
-					{props.movies}
-				</div>
-			)
+			<div>
+				{props.movies}
+			</div>
 		);
 	}
 });

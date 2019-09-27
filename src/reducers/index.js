@@ -43,8 +43,7 @@ const reducer = (state = initialState, action) => {
 			user: {
 				...state.user,
 				...action.payload
-			},
-			panelIndex: 1
+			}
 		}
 	} else if (action.type === MOVIELIST_REQUEST) {
 		return {
@@ -63,6 +62,7 @@ const reducer = (state = initialState, action) => {
 			moviesById,
 			ownedMovieList: action.payload,
 			isDownloadingMovieList: false,
+			panelIndex: 1
 		};
 	} else if (action.type === MOVIELIST_FAILED) {
 		return {

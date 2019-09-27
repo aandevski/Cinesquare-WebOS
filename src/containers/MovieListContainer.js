@@ -4,14 +4,6 @@ import MovieDetails from '../components/MovieDetails';
 import { connect } from 'react-redux';
 import { getOwnedMovies } from '../actions';
 
-const mapDispatchToProps = dispatch => {
-	return {
-		loadMovies: () => {
-			dispatch(getOwnedMovies());
-		}
-	};
-}
-
 const mapStateToProps = state => {
 	return {
 		movieArray: state.ownedMovieList,
@@ -27,10 +19,6 @@ class MovieListContainer extends Component {
 		};
 		this.onNextMovie = this.onNextMovie.bind(this);
 		this.onPrevMovie = this.onPrevMovie.bind(this);
-	}
-
-	componentDidMount() {
-		this.props.loadMovies();
 	}
 
 	onNextMovie() {
@@ -73,4 +61,4 @@ class MovieListContainer extends Component {
 	}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MovieListContainer);
+export default connect(mapStateToProps)(MovieListContainer);
